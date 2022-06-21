@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<meta charset="UTF-8">
+<style>
+    #header{
+    background-color: #525299;
+    text-align:center;
+    color: white;
+    font-family: "Microsoft Sans Serif";
+    top:0;
+    z-index: 0;
+    }
+</style>
+<head>
+    <div id="header">
+    <h1>Главная: Доска объявлений</h1>
+    </div>
+</head>
+<body>
+<h1>Объявления</h1>
+<div>
+    <a href="/cook/">Главная</a>
+    {% for rubric in rubrics %}
+    <a href="/by_rubric/{{rubric.pk}}/">{{ rubric.name }}</a>
+    {% endfor %}
+</div>
+{% for bb in bbs %}
+<div>
+    <h2>{{ bb.title }}</h2>
+    <p>{{ bb.context }} {{ bb.rubric.pk }}</p>
+    <p>{{ bb.published | date:"d.m.Y H:i:s"}}</p>
+</div>
+{% endfor %}
+</body>
+</html>

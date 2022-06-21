@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ current_rubric.name }}: Доска объявлений</title>
+</head>
+<body>
+<h1>Объявления</h1>
+<h2>Рубрика: {{ current_rubric }}</h2>
+<div><a href="/bboard/" >Главная</a>
+    {% for rubric in rubrics %}
+    <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a>
+    {% endfor %}
+</div>
+<div>
+    <form action="/send/" method="post">
+        {% csrf_token %}
+    <input name="title" type="text">
+    <input name="content" type="text">
+    <input name="price" type="text">
+    <input name="rubric_name" type="text" value='{{ current_rubric }}' readonly>
+    <input type="submit">
+    </form>
+</div>
+{% for bb in bbs %}
+<div>
+    <h2>{{ bb.title }}</h2>
+    <p>{{ bb.content }}</p>
+    <p>{{ bb.published | date:"d.m.Y H:i:s"}}</p>
+
+</div>
+{% endfor %}
+</body>
+</html>
